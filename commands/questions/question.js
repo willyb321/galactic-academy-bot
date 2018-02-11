@@ -35,6 +35,8 @@ module.exports = class QuestionCommand extends commando.Command {
 			const roleExists = !!roleMap[msg.channel.name];
 			if (roleExists) {
 				roleToTag = qGuild.roles.find(elem => elem.name.toLowerCase() === roleMap[msg.channel.name].toLowerCase());
+			} else {
+				msg.reply('No role found to ping.')
 			}
 		}
 		return !!roleToTag
