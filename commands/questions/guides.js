@@ -1,12 +1,12 @@
 const commando = require('discord.js-commando');
-const miningTxt = `Mining: <https://docs.google.com/presentation/d/1npzKEXpExd1aEz_hLvlQIELL1uX4gvVHtY9AhQ-CcCI/>
-Pristine Metallics Finder: <http://edtools.ddns.net/index.php>`;
-const explorationTxt = `Exploration: <https://docs.google.com/presentation/d/1nnVPJg7aggIJUomoHQ9STmseRJkREicL2UCJ1Dox5f4/>
-<https://docs.google.com/presentation/d/1ImdW1yeReyBXQ2NzJcVjEbWHOQLkYxdWVlsJFApqMYw/>`;
-const engiTxt = `Advice about engineers: <https://forums.frontier.co.uk/showthread.php/271640-All-engineers-leveled-to-grade-5-a-brag-a-guide-and-a-feedback>`;
-const newTxt = `Advice for new CMDRs:\nRadio Sidewinder care package: <https://docs.google.com/document/d/10ENR9b7TJBD1hSQ48I356sJkFZ2ii1_-wUBHWg1n0jI/>
-Day 0 Guide: <https://forums.frontier.co.uk/showthread.php/273168-Day-0-A-guide-for-brand-new-commanders>`;
-const powerplayTxt = `Powerplay: <https://docs.google.com/presentation/d/11rGAmoXjc-y3KD8veSqqGveLDEqjBTjzxWVHFw1on2w/>`;
+const miningTxt = `Mining: <https://willb.info/s/BJh5ez5vf>
+Pristine Metallics Finder: <https://willb.info/s/HJ9sefcwM>`;
+const explorationTxt = `Exploration: <https://willb.info/s/rkV3efcvf>
+<https://willb.info/s/BJ1pgf9wG>`;
+const engiTxt = `Advice about engineers: <https://willb.info/s/BJj6lz5vM>`;
+const newTxt = `Advice for new CMDRs:\nRadio Sidewinder care package: <https://willb.info/s/BJi0efcPM>
+Day 0 Guide: <https://willb.info/s/r1G1ZM5Pf>`;
+const powerplayTxt = `Powerplay: <https://willb.info/s/BJuJbG9Df>`;
 
 
 const fullText = [miningTxt, explorationTxt, engiTxt, newTxt, powerplayTxt].join('\n');
