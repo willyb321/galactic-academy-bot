@@ -2,7 +2,8 @@ const commando = require('discord.js-commando');
 const miningTxt = `Mining: <https://willb.info/s/BJh5ez5vf>
 Pristine Metallics Finder: <https://willb.info/s/HJ9sefcwM>`;
 const explorationTxt = `Exploration: <https://willb.info/s/rkV3efcvf>
-<https://willb.info/s/BJ1pgf9wG>`;
+<https://willb.info/s/BJ1pgf9wG>
+<https://willb.info/s/SkkUlsgOz>`;
 const engiTxt = `Advice about engineers: <https://willb.info/s/BJj6lz5vM>`;
 const newTxt = `Advice for new CMDRs:\nRadio Sidewinder care package: <https://willb.info/s/BJi0efcPM>
 Day 0 Guide: <https://willb.info/s/r1G1ZM5Pf>`;
