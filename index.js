@@ -6,7 +6,8 @@ const sqlite = require('sqlite');
 
 const client = new commando.Client({
 	owner: ['121791193301385216', '387529259901517835', '183414699214241792', '120290771529236482'],
-	commandPrefix: '!'
+	commandPrefix: '!',
+	unknownCommandResponse: false
 });
 
 client
