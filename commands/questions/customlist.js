@@ -37,10 +37,11 @@ module.exports = class CustomGetCommand extends commando.Command {
 					const keys = Object.keys(elem);
 					let reply = `Custom commands list:\n`;
 					keys.forEach(key => {
+						elem[key] = truncateString(elem[key].replace(/\n/, ' '), 35);
 						getUrls(elem[key]).forEach(url => {
-							elem[key] = truncateString(elem[key].replace(/\n/, ' '), 35);
 							elem[key] = elem[key].replace(url, `<${url}>`);
 						});
+
 						reply += `${key} - ${elem[key]}\n`
 					});
 					return msg.channel.send(reply);
