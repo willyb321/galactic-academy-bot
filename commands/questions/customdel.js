@@ -7,7 +7,7 @@ module.exports = class CustomDelCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'delcustom',
-			aliases: ['cd'],
+			aliases: ['dc'],
 			group: 'questions',
 			memberName: 'delcustom',
 			description: 'Delete custom commands.',

@@ -47,7 +47,7 @@ module.exports = class CustomSetCommand extends commando.Command {
 			return;
 		}
 		const guild = msg.guild;
-		const name = args.name;
+		const name = args.name.toLowerCase();
 		const val = args.text;
 		console.log(val);
 		return provider.set(guild, name, val)

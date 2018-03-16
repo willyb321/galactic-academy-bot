@@ -32,7 +32,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 			return;
 		}
 		const guild = msg.guild;
-		const name = args.name;
+		const name = args.name.toLowerCase();
 		const notFound = `Custom command ${name} not found.`;
 		let val;
 		try {
