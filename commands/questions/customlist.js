@@ -38,7 +38,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 					let reply = `Custom commands list:\n`;
 					keys.forEach(key => {
 						getUrls(elem[key]).forEach(url => {
-							elem[key] = truncateString(elem[key], 35);
+							elem[key] = truncateString(elem[key].replace(/\n/, ' '), 35);
 							elem[key] = elem[key].replace(url, `<${url}>`);
 						});
 						reply += `${key} - ${elem[key]}\n`
