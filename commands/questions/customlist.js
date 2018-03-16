@@ -1,4 +1,5 @@
 const commando = require('discord.js-commando');
+const getUrls = require('get-urls');
 
 module.exports = class CustomGetCommand extends commando.Command {
 	constructor(client) {
@@ -29,10 +30,19 @@ module.exports = class CustomGetCommand extends commando.Command {
 		msg.client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', msg.guild.id)
 			.then(elem => {
 				try {
+					if (!elem) {
+						return msg.channel.send('No custom settings found. Add one with the !s[et]c[ustom] command');
+					}
 					elem = JSON.parse(elem.settings);
 					const keys = Object.keys(elem);
 					let reply = `Custom commands list:\n`;
-					keys.forEach(key => reply += `${key} - ${truncateString(elem[key], 35)}\n`);
+					keys.forEach(key => {
+						getUrls(elem[key]).forEach(url => {
+							elem[key] = truncateString(elem[key], 35);
+							elem[key] = elem[key].replace(url, `<${url}>`);
+						});
+						reply += `${key} - ${elem[key]}\n`
+					});
 					return msg.channel.send(reply);
 				} catch (err) {
 					console.error(err);
