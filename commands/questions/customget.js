@@ -33,7 +33,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 		}
 		const guild = msg.guild;
 		const name = args.name.toLowerCase();
-		const notFound = `Custom command ${name} not found.`;
+		const notFound = `Custom command ${name} not found. Use !l[ist]c[ustom] to list.`;
 		let val;
 		try {
 			val = provider.get(guild, name, notFound);
@@ -41,6 +41,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 			console.error(err);
 			return msg.reply(`Had an error! Contact willyb321#2816`);
 		}
+
 		if (!val || val === notFound) {
 			return msg.reply(notFound);
 		}

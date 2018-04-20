@@ -1,6 +1,7 @@
 const commando = require('discord.js-commando');
 const getUrls = require('get-urls');
-
+const truncateString = (str, num) =>
+	str.length > num ? str.slice(0, num > 3 ? num - 3 : num) + '...' : str;
 module.exports = class CustomGetCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -14,7 +15,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 		});
 	}
 
-	async run(msg, args) {
+	async run(msg) {
 		if (!msg.client || !msg.guild) {
 			return;
 		}
@@ -25,8 +26,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 		if (!provider.db) {
 			return;
 		}
-		const truncateString = (str, num) =>
-			str.length > num ? str.slice(0, num > 3 ? num - 3 : num) + '...' : str;
+
 		msg.client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', msg.guild.id)
 			.then(elem => {
 				try {
@@ -42,7 +42,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 							elem[key] = elem[key].replace(url, `<${url}>`);
 						});
 
-						reply += `${key} - ${elem[key]}\n`
+						reply += `${key} - \`${elem[key]}\`\n`
 					});
 					return msg.channel.send(reply);
 				} catch (err) {
