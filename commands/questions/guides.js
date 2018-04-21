@@ -1,13 +1,14 @@
 const commando = require('discord.js-commando');
-const miningTxt = `Mining: <https://willb.info/s/BJh5ez5vf>
-Pristine Metallics Finder: <https://willb.info/s/HJ9sefcwM>`;
-const explorationTxt = `Exploration: <https://willb.info/s/rkV3efcvf>
-<https://willb.info/s/BJ1pgf9wG>
-<https://willb.info/s/SkkUlsgOz>`;
-const engiTxt = `Advice about engineers: <https://willb.info/s/BJj6lz5vM>`;
-const newTxt = `Advice for new CMDRs:\nRadio Sidewinder care package: <https://willb.info/s/BJi0efcPM>
-Day 0 Guide: <https://willb.info/s/r1G1ZM5Pf>`;
-const powerplayTxt = `Powerplay: <https://willb.info/s/BJuJbG9Df>`;
+const miningTxt = `Mining: <http://s.willb.info/SNTIDw>
+Pristine Metallics Finder: <http://s.willb.info/oGITHZ>`;
+const explorationTxt = `Exploration:
+<http://s.willb.info/CbfUOZ>
+<http://s.willb.info/Hq11mQ>
+<http://s.willb.info/oDGr2M>`;
+const engiTxt = `Advice about engineers: <http://s.willb.info/0GkpUa>`;
+const newTxt = `Advice for new CMDRs:\nRadio Sidewinder care package: <http://s.willb.info/s7JZrP>
+Day 0 Guide: <http://s.willb.info/uZSF8R>`;
+const powerplayTxt = `Powerplay: <http://s.willb.info/Sz3GYJ>`;
 
 
 const fullText = [miningTxt, explorationTxt, engiTxt, newTxt, powerplayTxt].join('\n');
