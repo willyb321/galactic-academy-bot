@@ -28,6 +28,7 @@ const mapText = {
 	newcmdr: newTxt,
 	pp: powerplayTxt,
 	trade: tradingTxt,
+	eng: engiTxt,
 	all: fullText
 };
 
@@ -37,7 +38,7 @@ module.exports = class QuestionCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'guide',
-			aliases: ['guides'],
+			aliases: ['guides', 'g'],
 			group: 'questions',
 			memberName: 'guide',
 			description: 'Useful guides.',
