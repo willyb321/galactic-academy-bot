@@ -8,6 +8,22 @@ Imperial Clipper (120mil budget): https://eddp.co/u/y6mAknEo
 Fer-De-Lance (150 mil budget): https://eddp.co/u/mSp5fU5P
 Python (250mil budget): https://eddp.co/u/MKxsqrgQ
 `;
+
+const explBuilds = `Exploration builds (courtesy of Grayscale):
+Diamondback Explorer (18mil budget): https://eddp.co/u/yYiyZpr1
+Anaconda (300mil budget): https://eddp.co/u/gFXWf9Uu
+Note: Exploration ships generally are aimed at maximizing jump range. As what commanders prefer to bring along with them when going on a trip varies, the optional slots are empty for you to choose your own extras such as srv hangars, fighter bays and repair/refuelling limpets (don't forget the cargo racks!) 
+As heat is your worst enemy in the deep, using an undersized class A power plant will help to reduce your ship's heat. You can however, still out to use a normal sized class D instead.`
+
+const fullText = [combatBuilds, explBuilds].join('\n');
+const mapText = {
+	all: fullText,
+	combat: combatBuilds,
+	explore: explBuilds
+};
+
+let choices = Object.keys(mapText).join('\n');
+
 module.exports = class BuildsCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -17,11 +33,25 @@ module.exports = class BuildsCommand extends commando.Command {
 			memberName: 'build',
 			description: 'Useful builds.',
 			examples: ['build'],
-			guildOnly: true
+			guildOnly: true,
+			args: [
+				{
+					key: 'build',
+					prompt: 'What builds do you want?',
+					type: 'string',
+					infinite: false,
+					default: 'all'
+				}
+			]
 		});
 	}
 
 	async run(msg, args) {
-		return msg.channel.send(combatBuilds);
+		const txt = mapText[args.build];
+
+		if (!txt) {
+			return msg.reply(`Builds not found.\nCorrect choices:\n${choices}`);
+		}
+		return msg.channel.send(txt);
 	}
 };
