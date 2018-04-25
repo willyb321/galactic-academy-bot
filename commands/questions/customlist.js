@@ -42,7 +42,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 							elem[key] = elem[key].replace(url, `<${url}>`);
 						});
 
-						reply += `${key} - \`${elem[key]}\`\n`
+						reply += `${key.replace(' ', '')} - \`${elem[key]}\`\n`
 					});
 					return msg.channel.send(reply);
 				} catch (err) {

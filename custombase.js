@@ -3,11 +3,11 @@ const commando = require('discord.js-commando');
 module.exports = class CustomRootCommand extends commando.Command {
 	constructor(client, cmdInfo) {
 		cmdInfo = {
-			name: cmdInfo.name,
+			name: cmdInfo.name.replace(' ', ''),
 			group: 'custom',
-			memberName: cmdInfo.name,
+			memberName: cmdInfo.name.replace(' ', ''),
 			description: 'A custom command.',
-			examples: [cmdInfo.name.toString()],
+			examples: [cmdInfo.name.replace(' ', '').toString()],
 			guildOnly: true
 		}
 		super(client, cmdInfo);
