@@ -10,8 +10,15 @@ module.exports = function(client, guild) {
 				elem = JSON.parse(elem.settings);
 				const keys = Object.keys(elem);
 				keys.forEach(key => {
-					const rootCmd = new CustomRootCommand(client, {name: key});
-					client.registry.registerCommand(rootCmd)
+					try {
+						const rootCmd = new CustomRootCommand(client, {name: key});
+						client.registry.registerCommand(rootCmd)
+					} catch (err) {
+						if (!err.message.endsWith('is already registered.')) {
+							console.error(err);
+						}
+					}
+
 				});
 			} catch (err) {
 				if (err.message.endsWith('is already registered.')) {
