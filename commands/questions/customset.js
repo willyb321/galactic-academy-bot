@@ -1,6 +1,8 @@
 const commando = require('discord.js-commando');
+const registerAllCmds = require('../../custom-reg')
 
 const botAccessID = '417830772838367233';
+console.log(registerAllCmds)
 
 module.exports = class CustomSetCommand extends commando.Command {
 	constructor(client) {
@@ -53,6 +55,7 @@ module.exports = class CustomSetCommand extends commando.Command {
 		return provider.set(guild, name, val)
 			.then(() => {
 				console.log(`Added custom command ${name}`);
+				registerAllCmds(msg.client, msg.guild);
 				return msg.reply(`Added custom command ${name}`)
 			})
 			.catch(err => {

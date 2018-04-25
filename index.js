@@ -1,9 +1,9 @@
 /* eslint-disable no-console */
 const commando = require('discord.js-commando');
 const path = require('path');
+const registerAllCmds = require('./custom-reg');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
-
 const client = new commando.Client({
 	owner: ['121791193301385216', '387529259901517835', '183414699214241792', '120290771529236482'],
 	commandPrefix: '!',
@@ -16,6 +16,9 @@ client
 	.on('debug', process.env.NODE_ENV !== 'production' ? console.info : () => null)
 	.on('ready', () => {
 		console.log(`Client ready; logged in as ${client.user.username}#${client.user.discriminator} (${client.user.id})`);
+		for (const i of client.guilds.array()) {
+			registerAllCmds(client, i);
+		}
 	})
 	.on('disconnect', () => { console.warn('Disconnected!'); })
 	.on('reconnecting', () => { console.warn('Reconnecting...'); })
@@ -56,7 +59,10 @@ client.setProvider(
 
 client.registry
 	.registerGroup('questions', 'Questions')
+	.registerGroup('custom', 'Custom')
 	.registerDefaults()
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
 client.login(process.env.DISCORD_TOKEN);
+
+

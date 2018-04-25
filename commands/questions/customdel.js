@@ -46,7 +46,12 @@ module.exports = class CustomDelCommand extends commando.Command {
 		return provider.remove(guild, name)
 			.then(() => {
 				console.log(`Removed custom command ${name}`);
+				const cmd = msg.client.registry.findCommands(name, true, msg)[0];
+				if (cmd) {
+					msg.client.registry.unregisterCommand(cmd)
+				}
 				return msg.reply(`Removed custom command ${name}`)
+
 			})
 			.catch(err => {
 				console.error(err);
