@@ -11,7 +11,8 @@ const engiTxt = `**Advice about engineers**:
 Levelling Engineers: <http://s.willb.info/0GkpUa>
 **Material Acquisition**:
 Dav's Hope and others: <http://s.willb.info/GoCkYC>
-SRV Scanner: <http://s.willb.info/neCdry>`;
+SRV Scanner: <http://s.willb.info/neCdry>
+Material List: <http://s.willb.info/Q6t9px>`;
 const newTxt = `**Advice for new CMDRs**:
 Radio Sidewinder care package: <http://s.willb.info/s7JZrP>
 Day 0 Guide: <http://s.willb.info/uZSF8R>`;
