@@ -14,6 +14,7 @@ const explBuilds = `Exploration builds:
 Budget explorer Type-6e: https://eddp.co/u/Zo36FALG
 DBX: https://eddp.co/u/e4ee51gg
 Anaconda: https://eddp.co/u/XptjDK4x
+ASP Explorer: https://eddp.co/u/FHy9ay5S
 **Note: Exploration ships generally aim for max jump range.  The optional slots are empty so you can choose extras such as srv hangars, fighter bays, or repair/refuelling limpets (don't forget the cargo racks!).  As heat is your worst enemy in the deep, using a smaller class A power plant helps for both range and ship temperature.**`;
 
 const fullText = [combatBuilds, explBuilds].join('\n');
