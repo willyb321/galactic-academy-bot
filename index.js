@@ -60,6 +60,7 @@ client.setProvider(
 client.registry
 	.registerGroup('questions', 'Questions')
 	.registerGroup('custom', 'Custom')
+	.registerGroup('misc', 'Misc')
 	.registerDefaults()
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
