@@ -38,8 +38,11 @@ module.exports = class MuteCommand extends Commando.Command {
 	}
 
 	hasPermission(message) {
+		if (!message.member) {
+			return false;
+		}
 		for (const i of rolesWithAccess) {
-			if (message.author.roles.get(i)) {
+			if (message.member.roles.get(i)) {
 				return true
 			}
 		}
