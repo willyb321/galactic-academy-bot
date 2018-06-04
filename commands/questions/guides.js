@@ -17,7 +17,17 @@ const newTxt = `**Advice for new CMDRs**:
 Radio Sidewinder care package: <http://s.willb.info/s7JZrP>
 Day 0 Guide: <http://s.willb.info/uZSF8R>`;
 const powerplayTxt = `**Powerplay**:
-The popular guide to powerplay: <http://s.willb.info/Sz3GYJ>`;
+The popular guide to powerplay: <http://s.willb.info/Sz3GYJ>
+Winters: <https://discordapp.com/invite/WGJGyCE>
+Hudson: <https://discord.gg/YDHTRUM>
+Torval: <https://discord.gg/WXBb784>
+Arissa Lavigny-Duval: <https://discord.gg/h28SG5H>
+Patreus: <https://discord.gg/RjWn3qv>
+Aisling uses Slack - how to join: <http://s.willb.info/XrgbuD>
+Archon: <https://discord.gg/0nLvLOrzijjO2POL>
+Li Yong-Rui: <https://discord.gg/0g95XxxKRcw7ypJZ>
+Grom: <https://discord.gg/uvh8Z3d>
+Antal: <https://discord.me/antal>`;
 const tradingTxt = `**Trading**:
 Traders Bible: <http://s.willb.info/SjKEqN>`;
 
