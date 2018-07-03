@@ -1,35 +1,34 @@
 const commando = require('discord.js-commando');
+
 const miningTxt = `**Mining**:
 The popular guide to mining: <http://s.willb.info/SNTIDw>
 Pristine Metallics Finder: <http://s.willb.info/oGITHZ>`;
+
 const explorationTxt = `**Exploration**:
 Planetary Landing: <http://s.willb.info/CbfUOZ>
 Hitchhiker's guide to the frontier: <http://s.willb.info/Hq11mQ>
 The popular guide to exploration: <http://s.willb.info/oDGr2M>
 Planet sounds: <http://s.willb.info/BT230J>`;
+
 const engiTxt = `**Advice about engineers**:
 Levelling Engineers: <http://s.willb.info/0GkpUa>
 **Material Acquisition**:
 Dav's Hope and others: <http://s.willb.info/GoCkYC>
 SRV Scanner: <http://s.willb.info/neCdry>
 Material List: <http://s.willb.info/Q6t9px>`;
+
 const newTxt = `**Advice for new CMDRs**:
 Radio Sidewinder care package: <http://s.willb.info/s7JZrP>
 Day 0 Guide: <http://s.willb.info/uZSF8R>`;
+
 const powerplayTxt = `**Powerplay**:
 The popular guide to powerplay: <http://s.willb.info/Sz3GYJ>
-Winters: <https://discordapp.com/invite/WGJGyCE>
-Hudson: <https://discord.gg/YDHTRUM>
-Torval: <https://discord.gg/WXBb784>
-Arissa Lavigny-Duval: <https://discord.gg/h28SG5H>
-Patreus: <https://discord.gg/RjWn3qv>
-Aisling uses Slack - how to join: <http://s.willb.info/XrgbuD>
-Archon: <https://discord.gg/0nLvLOrzijjO2POL>
-Li Yong-Rui: <https://discord.gg/0g95XxxKRcw7ypJZ>
-Grom: <https://discord.gg/uvh8Z3d>
-Antal: <https://discord.me/antal>`;
+Powerplay + more discords: <http://s.willb.info/m2AkOY>`;
+
 const tradingTxt = `**Trading**:
-Traders Bible: <http://s.willb.info/SjKEqN>`;
+Traders Bible: <http://s.willb.info/SjKEqN>
+How to use EDDB.io to find trade routes: <http://s.willb.info/F0qIwV>
+Finding Trade Routes with In-Game Tools: <http://s.willb.info/VhvjLr>`;
 
 
 const fullText = [miningTxt, explorationTxt, engiTxt, newTxt, powerplayTxt, tradingTxt].join('\n');

@@ -44,7 +44,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 
 						reply += `${key.replace(' ', '')} - \`${elem[key]}\`\n`
 					});
-					return msg.channel.send(reply);
+					return msg.channel.send(reply, {split: true});
 				} catch (err) {
 					console.error(err);
 					return msg.channel.send(`Had an error. Contact willyb321#2816`);
