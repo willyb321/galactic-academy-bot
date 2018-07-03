@@ -10,6 +10,9 @@ module.exports = function(client, guild) {
 				elem = JSON.parse(elem.settings);
 				const keys = Object.keys(elem);
 				keys.forEach(key => {
+					if (key.startsWith('twitch_')) {
+						return;
+					}
 					try {
 						const rootCmd = new CustomRootCommand(client, {name: key});
 						client.registry.registerCommand(rootCmd)
