@@ -2,7 +2,7 @@ const commando = require('discord.js-commando');
 const getUrls = require('get-urls');
 const rp = require('request-promise-native');
 const _ = require('lodash');
-
+const botAccessID = '417830772838367233';
 function delGuide(client, guild, category, title) {
 	return client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', guild.id)
 		.then(async elem => {
@@ -62,6 +62,13 @@ module.exports = class AddGuideCommand extends commando.Command {
 				}
 			]
 		});
+	}
+
+	hasPermission(msg) {
+		if (!msg || !msg.member) {
+			return false;
+		}
+		return !!msg.member.roles.get(botAccessID);
 	}
 
 	async run(msg, args) {
