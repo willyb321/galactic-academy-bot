@@ -7,6 +7,8 @@ const TwitchListener = require('./twitch');
 const sqlite = require('sqlite');
 const TextChannel = require('discord.js').TextChannel;
 const RichEmbed = require('discord.js').RichEmbed;
+const _ = require('lodash');
+
 const client = new commando.Client({
 	owner: ['121791193301385216', '387529259901517835', '183414699214241792', '120290771529236482'],
 	commandPrefix: process.env.NODE_ENV === 'production' ? '!' : '?',
@@ -81,6 +83,9 @@ const twitchInstances = {
 const listeners = ({ topic, endpoint, event }, i) => {
 	console.log(event);
 	if (event && event.data && event.data.length > 0) {
+		if (event.data[0].id !== i._id) {
+			return;
+		}
 		const channel = client.channels.get(i._channel);
 		const embed = new RichEmbed();
 		embed.setDescription(event.data[0].title);
@@ -90,7 +95,6 @@ const listeners = ({ topic, endpoint, event }, i) => {
 		embed.setURL(`https://twitch.tv/${i._username}`);
 		channel.send({embed});
 	}
-
 };
 
 
