@@ -43,6 +43,42 @@ const mapText = {
 };
 
 let choices = Object.keys(mapText).join('\n');
+function initDB(client, guild) {
+	client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', guild.id)
+		.then(elem => {
+			if (!elem) {
+				return;
+			}
+			let last = 0;
+			elem = JSON.parse(elem.settings);
+			const keys = Object.keys(elem);
+			keys.forEach(key => {
+				if (key.startsWith('twitch_')) {
+					return;
+				}
+				if (key.startsWith('builds_')) {
+					return;
+				}
+				if (!key.startsWith('guides_')) {
+					return;
+				}
+				last = parseInt(key.split('_')[2]);
+			});
+			if (last > 0) {
+				return;
+			}
+			for (const i in mapText) {
+				const split = mapText[i].split('\n');
+				split.forEach(async elem => {
+					last = last + 1;
+					await guild.settings.set(`guides_${i}_${last}`, elem);
+				})
+			}
+		})
+		.catch(err => {
+			console.error(err);
+		});
+}
 
 module.exports = class QuestionCommand extends commando.Command {
 	constructor(client) {
@@ -68,10 +104,50 @@ module.exports = class QuestionCommand extends commando.Command {
 
 	async run(msg, args) {
 		const txt = mapText[args.guide];
-
-		if (!txt) {
-			return msg.reply(`Guide not found.\nCorrect choices:\n${choices}`);
+		initDB(msg.client, msg.guild);
+		const guides = await getAllGuides(msg.client, msg.guild, args.guide);
+		if (!guides || guides.length === 0) {
+			return msg.reply(`Guide not found.\nCorrect choices:\n${choices}`, {split: true});
 		}
-		return msg.channel.send(txt);
+		if (!txt) {
+			return msg.reply(`Guide not found.\nCorrect choices:\n${choices}`, {split: true});
+		}
+		return msg.channel.send(guides.join('\n'), {split: true});
 	}
 };
+
+
+function getAllGuides(client, guild, category) {
+	let guides = [];
+	if (!category) {
+		category = 'all';
+	}
+	return client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', guild.id)
+		.then(elem => {
+			try {
+				if (!elem) {
+					return;
+				}
+				elem = JSON.parse(elem.settings);
+				const keys = Object.keys(elem);
+				keys.forEach(key => {
+					if (key.startsWith('twitch_')) {
+						return;
+					}
+					if (key.startsWith('builds_')) {
+						return;
+					}
+					if (!key.startsWith(`guides_${category}`)) {
+						return;
+					}
+					guides.push(elem[key]);
+				});
+				return guides;
+			} catch (err) {
+				console.error(err);
+			}
+		})
+		.catch(err => {
+			console.error(err);
+		});
+}

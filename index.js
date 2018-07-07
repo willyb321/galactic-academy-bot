@@ -9,7 +9,7 @@ const TextChannel = require('discord.js').TextChannel;
 const RichEmbed = require('discord.js').RichEmbed;
 const client = new commando.Client({
 	owner: ['121791193301385216', '387529259901517835', '183414699214241792', '120290771529236482'],
-	commandPrefix: '!',
+	commandPrefix: process.env.NODE_ENV === 'production' ? '!' : '?',
 	unknownCommandResponse: false
 });
 

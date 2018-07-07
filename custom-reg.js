@@ -13,6 +13,12 @@ module.exports = function(client, guild) {
 					if (key.startsWith('twitch_')) {
 						return;
 					}
+					if (key.startsWith('builds_')) {
+						return;
+					}
+					if (key.startsWith('guides_')) {
+						return;
+					}
 					try {
 						const rootCmd = new CustomRootCommand(client, {name: key});
 						client.registry.registerCommand(rootCmd)
