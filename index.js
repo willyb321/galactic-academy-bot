@@ -83,7 +83,7 @@ const twitchInstances = {
 };
 
 const listeners = ({ topic, endpoint, event }, i) => {
-	if (event && event._data) {
+	if (event && event._data && event._data.stream) {
 		if (event._data.stream.channel._id.toString() !== i._id) {
 			return;
 		}
