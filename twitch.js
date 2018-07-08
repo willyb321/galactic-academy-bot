@@ -1,5 +1,9 @@
 const TwitchWebhook = require('twitch-webhook');
 const EventEmitter = require('events').EventEmitter;
+const TwitchClient = require('twitch').default;
+
+const clientId = process.env.TWITCH_CLIENT_ID;
+const accessToken = process.env.TWITCH_CLIENT_SECRET;
 
 const twitchWebhook = new TwitchWebhook({
 	client_id: process.env.TWITCH_CLIENT_ID,
@@ -10,6 +14,19 @@ const twitchWebhook = new TwitchWebhook({
 		host: '0.0.0.0'    // default: 0.0.0.0
 	}
 });
+const twitchClient = TwitchClient.withCredentials(clientId, accessToken);
+
+const interval = 120000;
+
+async function isStreamLive(id) {
+	try {
+		const user = await twitchClient.users.getUser(id);
+		await user.getStream(); // will reject the promise if the stream is not live
+		return true;
+	} catch (e) {
+		return false;
+	}
+}
 
 
 twitchWebhook.on('unsubscibe', (obj) => {
@@ -32,42 +49,55 @@ class TwitchListener extends EventEmitter {
 		this._id = userId;
 		this._channel = channelId;
 		this._username = username;
+		this._interval = null;
 		console.log(`Initialising twitch watcher (user: ${username}, twitch ID: ${this._id})`);
 		this.initTwitch();
 	}
 
 	initTwitch() {
-		this._twitch = twitchWebhook;
+		this._twitch = twitchClient;
 		this.sub()
 
 	}
 
 	async destroy() {
 		// unsubscribe from all topics
-		await this._twitch.unsubscribe('*');
+		clearInterval(this._interval);
+		this._interval = null;
+	}
+
+	async getInfo() {
+		try {
+			return await twitchClient.streams.getStreamByChannel(this._id); // will reject the promise if the stream is not live
+		} catch (e) {
+			return false;
+		}
+
+
+	}
+
+	async tick() {
+		this.getInfo()
+			.then(data => {
+				this.emit('streams', {event: data});
+			})
+			.catch(err => {
+				console.error(err);
+			});
 	}
 
 	sub() {
-		this._twitch.subscribe(`streams`, {
-			user_id: this._id
-		})
-		.catch(err => {
-			console.error(err.message);
-		});
 		// set listener for topic
-		this._twitch.on('streams', ({ topic, endpoint, event }) => {
-			this.emit('streams', {topic, endpoint, event});
-		});
+		this.tick();
+		const tick = this.tick.bind(this);
+		this._interval = setInterval(tick, interval)
 
 	}
 
 	unsub() {
-		this._twitch.unsubscribe(`streams`, {
-			user_id: this._id
-		})
-		.catch(err => {
-			console.error(err.message);
-		});
+		// unsubscribe from all topics
+		clearInterval(this._interval);
+		this._interval = null;
 	}
 }
 

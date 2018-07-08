@@ -77,23 +77,28 @@ client.login(process.env.DISCORD_TOKEN);
 
 const twitchInstances = {
 	listeners: [],
-	instances: []
+	instances: [],
+	timestamps: {}
 };
 
 const listeners = ({ topic, endpoint, event }, i) => {
-	console.log(event);
-	if (event && event.data && event.data.length > 0) {
-		if (event.data[0].user_id !== i._id) {
+	if (event && event._data) {
+		if (event._data.stream.channel._id.toString() !== i._id) {
 			return;
 		}
+		if (event._data.stream.created_at === twitchInstances.timestamps[event._data.stream.channel._id]) {
+			return;
+		}
+		console.log(event._data.stream);
 		const channel = client.channels.get(i._channel);
 		const embed = new RichEmbed();
-		embed.setDescription(event.data[0].title);
-		embed.setTitle(`${i._username} just went live`);
-		const url = `${event.data[0].thumbnail_url.replace('{width}', '1280').replace('{height}', '720')}?cache=${new Date().valueOf()}`;
+		embed.setDescription(event._data.stream.channel.status);
+		embed.setTitle(`${i._username} just went live with ${event._data.stream.game}`);
+		const url = `${event._data.stream.preview.template.replace('{width}', '1280').replace('{height}', '720')}?cache=${new Date().valueOf()}`;
 		embed.setImage(url);
-		embed.setURL(`https://twitch.tv/${i._username}`);
+		embed.setURL(event._data.stream.channel.url);
 		channel.send({embed});
+		twitchInstances.timestamps[event._data.stream.channel._id] = event._data.stream.created_at;
 	}
 };
 
