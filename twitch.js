@@ -46,7 +46,7 @@ class TwitchListener extends EventEmitter {
 		this._id = userId;
 		this._channel = channelId;
 		this._username = username;
-		console.log(`Initialising twitch watcher (user: ${username}, twitch ID: ${this._channel})`);
+		console.log(`Initialising twitch watcher (user: ${username}, twitch ID: ${this._id})`);
 		this.initTwitch();
 	}
 
