@@ -78,13 +78,17 @@ client.login(process.env.DISCORD_TOKEN);
 const twitchInstances = {
 	listeners: [],
 	instances: [],
-	timestamps: {}
+	timestamps: {},
+	startTime: new Date()
 };
 
 const listeners = ({ topic, endpoint, event }, i) => {
 	if (event && event._data) {
 		if (event._data.stream.channel._id.toString() !== i._id) {
 			return;
+		}
+		if (event._data.stream.created_at <= twitchInstances.startTime.toISOString()) {
+			return
 		}
 		if (event._data.stream.created_at === twitchInstances.timestamps[event._data.stream.channel._id]) {
 			return;
