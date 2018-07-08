@@ -12,20 +12,6 @@ const twitchWebhook = new TwitchWebhook({
 });
 
 
-// set listener for all topics
-twitchWebhook.on('*', ({topic, options, endpoint, event}) => {
-	// topic name, for example "streams"
-	console.log(topic);
-	// topic options, for example "{user_id: 12826}"
-	console.log(options);
-	// full topic URL, for example
-	// "https://api.twitch.tv/helix/streams?user_id=12826"
-	console.log(endpoint);
-	// topic data, timestamps are automatically converted to Date
-	console.log(event)
-});
-// subscribe to topic
-
 twitchWebhook.on('unsubscibe', (obj) => {
 	twitchWebhook.subscribe(obj['hub.topic'])
 		.catch(err => {
