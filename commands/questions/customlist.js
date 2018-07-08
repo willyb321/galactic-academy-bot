@@ -37,6 +37,15 @@ module.exports = class CustomGetCommand extends commando.Command {
 					const keys = Object.keys(elem);
 					let reply = `Custom commands list:\n`;
 					keys.forEach(key => {
+						if (key.startsWith('twitch_')) {
+							return;
+						}
+						if (key.startsWith('builds_')) {
+							return;
+						}
+						if (key.startsWith('guides_')) {
+							return;
+						}
 						elem[key] = truncateString(elem[key].replace(/\n/, ' '), 35);
 						getUrls(elem[key]).forEach(url => {
 							elem[key] = elem[key].replace(url, `<${url}>`);
