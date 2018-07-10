@@ -45,6 +45,9 @@ module.exports = class PurgeCommand extends commando.Command {
 		}
 		return message.channel.fetchMessages({limit: limit + 1})
 			.then(messages => message.channel.bulkDelete(messages))
+			.then(() => {
+				return undefined;
+			})
 			.catch(err => {
 			});
 	}
