@@ -93,6 +93,9 @@ const listeners = ({ topic, endpoint, event }, i) => {
 		if (event._data.stream.created_at === twitchInstances.timestamps[event._data.stream.channel._id]) {
 			return;
 		}
+		if (event._data.stream.game !== 'Elite: Dangerous') {
+			return;
+		}
 		console.log(event._data.stream);
 		const channel = client.channels.get(i._channel);
 		const embed = new RichEmbed();
