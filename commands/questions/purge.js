@@ -43,7 +43,7 @@ module.exports = class PurgeCommand extends commando.Command {
 		if (limit > 25) {
 			limit = 25;
 		}
-		return message.channel.messages.fetch({limit: limit + 1})
+		return message.channel.fetchMessages({limit: limit + 1})
 			.then(messages => message.channel.bulkDelete(messages))
 			.catch(err => {
 			});
