@@ -36,7 +36,7 @@ module.exports = class CustomSetCommand extends commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(msg, args) {
@@ -55,12 +55,11 @@ module.exports = class CustomSetCommand extends commando.Command {
 			.then(() => {
 				console.log(`Added custom command ${name}`);
 				registerAllCmds(msg.client, msg.guild);
-				return msg.reply(`Added custom command ${name}`)
+				return msg.reply(`Added custom command ${name}`);
 			})
 			.catch(err => {
 				console.error(err);
-				return msg.reply(`Had an error! Contact willyb321#2816.`);
+				return msg.reply('Had an error! Contact willyb321#2816.');
 			});
-
 	}
 };

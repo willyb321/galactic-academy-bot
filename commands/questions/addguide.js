@@ -2,6 +2,7 @@ const commando = require('discord.js-commando');
 const getUrls = require('get-urls');
 const rp = require('request-promise-native');
 const _ = require('lodash');
+
 const botAccessID = '417830772838367233';
 function setGuide(client, guild, category, guide) {
 	return client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', guild.id)
@@ -72,20 +73,20 @@ module.exports = class AddGuideCommand extends commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(msg, args) {
 		let text = args.guide;
-		let title = `**${args.title}:**`;
-		let category = args.category;
+		const title = `**${args.title}:**`;
+		const category = args.category;
 		const urls = getUrls(text, {
 			stripFragment: false,
 			removeTrailingSlash: false,
 			sortQueryParameters: false,
 			stripWWW: false
 		});
-		let promises = [];
+		const promises = [];
 		urls.forEach(url => {
 			promises.push(rp('https://kutt.it/api/url/submit', {
 				method: 'POST',

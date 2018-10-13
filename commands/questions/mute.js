@@ -5,8 +5,9 @@
  * ignore
  */
 const Commando = require('discord.js-commando');
+
 const muteRoleId = '375632007365132288';
-const rolesWithAccess = ['147037677764608000', '147037704142454784']; // captains + mentors
+const rolesWithAccess = ['147037677764608000', '147037704142454784']; // Captains + mentors
 module.exports = class MuteCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
@@ -43,7 +44,7 @@ module.exports = class MuteCommand extends Commando.Command {
 		}
 		for (const i of rolesWithAccess) {
 			if (message.member.roles.get(i)) {
-				return true
+				return true;
 			}
 		}
 		return message.client.isOwner(message.author);
@@ -59,11 +60,11 @@ module.exports = class MuteCommand extends Commando.Command {
 		return args.user.addRole(muteRole)
 			.then(() => {
 				setTimeout(async () => {
-					await args.user.removeRole(muteRole, `Removed mute after ${args.time} mins`)
-				}, time)
+					await args.user.removeRole(muteRole, `Removed mute after ${args.time} mins`);
+				}, time);
 			})
 			.catch(err => {
 				console.error(err);
 			});
 	}
-}
+};

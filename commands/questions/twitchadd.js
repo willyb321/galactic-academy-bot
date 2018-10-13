@@ -6,7 +6,8 @@
  */
 const Commando = require('discord.js-commando');
 const TwitchListener = require('../../twitch');
-const resetTwitch = require('../../index').resetTwitch;
+const resetTwitch = require('../..').resetTwitch;
+
 const botAccessID = '417830772838367233';
 const TwitchClient = require('twitch').default;
 const RichEmbed = require('discord.js').RichEmbed;
@@ -18,13 +19,12 @@ const twitchClient = TwitchClient.withCredentials(clientId, accessToken);
 async function findTwitchId(userName) {
 	try {
 		const user = await twitchClient.users.getUserByName(userName);
-		return user.id; // will reject the promise if the stream is not live
+		return user.id; // Will reject the promise if the stream is not live
 	} catch (e) {
 		console.error(e.message);
 		return undefined;
 	}
 }
-
 
 module.exports = class TwitchCommand extends Commando.Command {
 	constructor(client) {
@@ -52,19 +52,18 @@ module.exports = class TwitchCommand extends Commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(message, args) {
-		const initTwitch = require('../../index').initTwitch;
-		const resetTwitch = require('../../index').resetTwitch;
+		const initTwitch = require('../..').initTwitch;
+		const resetTwitch = require('../..').resetTwitch;
 		try {
-
 			const id = await findTwitchId(args.name);
 			const settingsKey = `twitch_sub_${id}`;
 			const provider = message.guild.settings;
 
-			if (!!provider.get(settingsKey)) {
+			if ((provider.get(settingsKey))) {
 				await provider.remove(settingsKey);
 				message.channel.send(`Unsubscribed from ${args.name}. No more notifications will be sent from this channel.`);
 			} else {
@@ -83,8 +82,6 @@ module.exports = class TwitchCommand extends Commando.Command {
 		} finally {
 			resetTwitch();
 			initTwitch(message.guild.id);
-
 		}
-
 	}
 };

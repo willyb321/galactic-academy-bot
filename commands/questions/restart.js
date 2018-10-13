@@ -17,9 +17,11 @@ module.exports = class RestartCommand extends Commando.Command {
 			examples: ['restart']
 		});
 	}
+
 	hasPermission(message) {
 		return message.client.isOwner(message.author);
 	}
+
 	async run(message) {
 		const client = message.client;
 		console.log('Restarting');
@@ -38,4 +40,4 @@ module.exports = class RestartCommand extends Commando.Command {
 				process.exit(1);
 			});
 	}
-}
+};

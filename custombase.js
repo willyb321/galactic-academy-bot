@@ -9,7 +9,7 @@ module.exports = class CustomRootCommand extends commando.Command {
 			description: 'A custom command.',
 			examples: [cmdInfo.name.replace(' ', '').toString()],
 			guildOnly: true
-		}
+		};
 		super(client, cmdInfo);
 		this.cmdInfo = cmdInfo;
 	}
@@ -30,7 +30,7 @@ module.exports = class CustomRootCommand extends commando.Command {
 			val = provider.get(guild, name, notFound);
 		} catch (err) {
 			console.error(err);
-			return msg.reply(`Had an error! Contact willyb321#2816`);
+			return msg.reply('Had an error! Contact willyb321#2816');
 		}
 		if (!val || val === notFound) {
 			return msg.reply(notFound);

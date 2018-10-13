@@ -32,17 +32,17 @@ module.exports = class QuestionCommand extends commando.Command {
 		const qGuild = msg.client.guilds.get(process.env.GALACTIC_ACADEMY || '412071767490691082');
 		let roleToTag = qGuild.roles.find(elem => elem.name.toLowerCase() === msg.channel.name.toLowerCase());
 		if (!roleToTag) {
-			const roleExists = !!roleMap[msg.channel.name];
+			const roleExists = Boolean(roleMap[msg.channel.name]);
 			if (roleExists) {
 				roleToTag = qGuild.roles.find(elem => elem.name.toLowerCase() === roleMap[msg.channel.name].toLowerCase());
 			}
 		}
 		if (!roleToTag) {
-			const roleExists = !!roleMap[msg.channel.name];
+			const roleExists = Boolean(roleMap[msg.channel.name]);
 			if (roleExists) {
 				roleToTag = qGuild.roles.find(elem => elem.name.toLowerCase() === roleMap[msg.channel.name].toLowerCase());
 			} else {
-				return msg.reply('No role found to ping.')
+				return msg.reply('No role found to ping.');
 			}
 		}
 

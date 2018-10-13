@@ -5,6 +5,7 @@
  * ignore
  */
 const commando = require('discord.js-commando');
+
 const botAccessID = '417830772838367233';
 module.exports = class PurgeCommand extends commando.Command {
 	constructor(client) {
@@ -31,8 +32,7 @@ module.exports = class PurgeCommand extends commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
-
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(message, args) {
@@ -52,5 +52,4 @@ module.exports = class PurgeCommand extends commando.Command {
 			});
 	}
 };
-
 

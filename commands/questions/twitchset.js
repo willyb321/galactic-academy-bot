@@ -6,6 +6,7 @@
  */
 const Commando = require('discord.js-commando');
 const TwitchListener = require('../../twitch');
+
 const botAccessID = '417830772838367233';
 
 module.exports = class TwitchSetCommand extends Commando.Command {
@@ -26,7 +27,7 @@ module.exports = class TwitchSetCommand extends Commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(message) {

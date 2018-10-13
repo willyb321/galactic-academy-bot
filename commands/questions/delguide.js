@@ -2,6 +2,7 @@ const commando = require('discord.js-commando');
 const getUrls = require('get-urls');
 const rp = require('request-promise-native');
 const _ = require('lodash');
+
 const botAccessID = '417830772838367233';
 function delGuide(client, guild, category, title) {
 	return client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', guild.id)
@@ -21,7 +22,7 @@ function delGuide(client, guild, category, title) {
 				if (key.startsWith('builds_')) {
 					continue;
 				}
-				if (!key.startsWith(`guides_`)) {
+				if (!key.startsWith('guides_')) {
 					continue;
 				}
 				last++;
@@ -29,7 +30,6 @@ function delGuide(client, guild, category, title) {
 					const key = `guides_${category}_${last}`;
 					return guild.settings.remove(key);
 				}
-
 			}
 		})
 		.catch(err => {
@@ -68,11 +68,11 @@ module.exports = class AddGuideCommand extends commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(msg, args) {
-		let title = _.escapeRegExp(`**${args.title}:**`);
+		const title = _.escapeRegExp(`**${args.title}:**`);
 		await delGuide(msg.client, msg.guild, args.category, title);
 		return msg.channel.send(`Tried to delete the guide ${args.title} under ${args.category}, check guide command output again.`);
 	}

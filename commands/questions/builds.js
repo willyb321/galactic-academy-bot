@@ -1,4 +1,5 @@
 const commando = require('discord.js-commando');
+
 const combatBuilds = `Combat Builds (Courtesy of Tempest):
 Viper MK.III (4mil budget): <https://s.orbis.zone/GVNAurCo>
 Cobra MK.III (10mil budget): <https://s.orbis.zone/SpfvZC96>
@@ -24,7 +25,7 @@ const mapText = {
 	explore: explBuilds
 };
 
-let choices = Object.keys(mapText).join('\n');
+const choices = Object.keys(mapText).join('\n');
 
 module.exports = class BuildsCommand extends commando.Command {
 	constructor(client) {

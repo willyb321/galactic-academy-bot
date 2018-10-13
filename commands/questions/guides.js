@@ -30,7 +30,6 @@ Traders Bible: <http://s.willb.info/SjKEqN>
 How to use EDDB.io to find trade routes: <http://s.willb.info/F0qIwV>
 Finding Trade Routes with In-Game Tools: <http://s.willb.info/VhvjLr>`;
 
-
 const fullText = [miningTxt, explorationTxt, engiTxt, newTxt, powerplayTxt, tradingTxt].join('\n');
 const mapText = {
 	mining: miningTxt,
@@ -42,7 +41,7 @@ const mapText = {
 	all: fullText
 };
 
-let choices = Object.keys(mapText).join('\n');
+const choices = Object.keys(mapText).join('\n');
 function initDB(client, guild) {
 	client.provider.db.get('SELECT settings FROM settings WHERE guild = ?', guild.id)
 		.then(elem => {
@@ -70,9 +69,9 @@ function initDB(client, guild) {
 			for (const i in mapText) {
 				const split = mapText[i].split('\n');
 				split.forEach(async elem => {
-					last = last + 1;
+					last += 1;
 					await guild.settings.set(`guides_${i}_${last}`, elem);
-				})
+				});
 			}
 		})
 		.catch(err => {
@@ -89,7 +88,7 @@ module.exports = class QuestionCommand extends commando.Command {
 			memberName: 'guide',
 			description: 'Useful guides.',
 			examples: ['guide'],
-			guildOnly: false,
+			guildOnly: true,
 			args: [
 				{
 					key: 'guide',
@@ -116,9 +115,8 @@ module.exports = class QuestionCommand extends commando.Command {
 	}
 };
 
-
 function getAllGuides(client, guild, category) {
-	let guides = [];
+	const guides = [];
 	if (!category) {
 		category = 'all';
 	}

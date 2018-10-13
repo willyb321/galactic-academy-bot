@@ -2,7 +2,6 @@ const commando = require('discord.js-commando');
 
 const botAccessID = '417830772838367233';
 
-
 module.exports = class CustomDelCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -30,7 +29,7 @@ module.exports = class CustomDelCommand extends commando.Command {
 		if (!msg || !msg.member) {
 			return false;
 		}
-		return !!msg.member.roles.get(botAccessID);
+		return Boolean(msg.member.roles.get(botAccessID));
 	}
 
 	async run(msg, args) {
@@ -48,14 +47,13 @@ module.exports = class CustomDelCommand extends commando.Command {
 				console.log(`Removed custom command ${name}`);
 				const cmd = msg.client.registry.findCommands(name, true, msg)[0];
 				if (cmd) {
-					msg.client.registry.unregisterCommand(cmd)
+					msg.client.registry.unregisterCommand(cmd);
 				}
-				return msg.reply(`Removed custom command ${name}`)
-
+				return msg.reply(`Removed custom command ${name}`);
 			})
 			.catch(err => {
 				console.error(err);
-				return msg.reply(`Had an error! Contact willyb321#2816.`);
+				return msg.reply('Had an error! Contact willyb321#2816.');
 			});
 	}
-}
+};

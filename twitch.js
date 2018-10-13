@@ -8,10 +8,10 @@ const accessToken = process.env.TWITCH_CLIENT_SECRET;
 const twitchWebhook = new TwitchWebhook({
 	client_id: process.env.TWITCH_CLIENT_ID,
 	callback: process.env.TWITCH_CALLBACK,
-	secret: process.env.TWITCH_CLIENT_SECRET, // default: false
+	secret: process.env.TWITCH_CLIENT_SECRET, // Default: false
 	listen: {
-		port: 8888,           // default: 8443
-		host: '0.0.0.0'    // default: 0.0.0.0
+		port: 8888, // Default: 8443
+		host: '0.0.0.0' // Default: 0.0.0.0
 	}
 });
 const twitchClient = TwitchClient.withCredentials(clientId, accessToken);
@@ -21,26 +21,25 @@ const interval = 120000;
 async function isStreamLive(id) {
 	try {
 		const user = await twitchClient.users.getUser(id);
-		await user.getStream(); // will reject the promise if the stream is not live
+		await user.getStream(); // Will reject the promise if the stream is not live
 		return true;
 	} catch (e) {
 		return false;
 	}
 }
 
-
-twitchWebhook.on('unsubscibe', (obj) => {
+twitchWebhook.on('unsubscibe', obj => {
 	twitchWebhook.subscribe(obj['hub.topic'])
 		.catch(err => {
 			console.error(err.message);
-		})
+		});
 });
 
 process.on('SIGINT', async () => {
-	// unsubscribe from all topics
+	// Unsubscribe from all topics
 	await twitchWebhook.unsubscribe('*');
 
-	process.exit(0)
+	process.exit(0);
 });
 
 class TwitchListener extends EventEmitter {
@@ -56,24 +55,21 @@ class TwitchListener extends EventEmitter {
 
 	initTwitch() {
 		this._twitch = twitchClient;
-		this.sub()
-
+		this.sub();
 	}
 
 	async destroy() {
-		// unsubscribe from all topics
+		// Unsubscribe from all topics
 		clearInterval(this._interval);
 		this._interval = null;
 	}
 
 	async getInfo() {
 		try {
-			return await twitchClient.streams.getStreamByChannel(this._id); // will reject the promise if the stream is not live
+			return await twitchClient.streams.getStreamByChannel(this._id); // Will reject the promise if the stream is not live
 		} catch (e) {
 			return false;
 		}
-
-
 	}
 
 	async tick() {
@@ -87,15 +83,14 @@ class TwitchListener extends EventEmitter {
 	}
 
 	sub() {
-		// set listener for topic
+		// Set listener for topic
 		this.tick();
 		const tick = this.tick.bind(this);
-		this._interval = setInterval(tick, interval)
-
+		this._interval = setInterval(tick, interval);
 	}
 
 	unsub() {
-		// unsubscribe from all topics
+		// Unsubscribe from all topics
 		clearInterval(this._interval);
 		this._interval = null;
 	}

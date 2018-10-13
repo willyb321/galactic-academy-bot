@@ -1,5 +1,6 @@
 const commando = require('discord.js-commando');
 const getUrls = require('get-urls');
+
 const truncateString = (str, num) =>
 	str.length > num ? str.slice(0, num > 3 ? num - 3 : num) + '...' : str;
 module.exports = class CustomGetCommand extends commando.Command {
@@ -35,7 +36,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 					}
 					elem = JSON.parse(elem.settings);
 					const keys = Object.keys(elem);
-					let reply = `Custom commands list:\n`;
+					let reply = 'Custom commands list:\n';
 					keys.forEach(key => {
 						if (key.startsWith('twitch_')) {
 							return;
@@ -51,17 +52,17 @@ module.exports = class CustomGetCommand extends commando.Command {
 							elem[key] = elem[key].replace(url, `<${url}>`);
 						});
 
-						reply += `${key.replace(' ', '')} - \`${elem[key]}\`\n`
+						reply += `${key.replace(' ', '')} - \`${elem[key]}\`\n`;
 					});
 					return msg.channel.send(reply, {split: true});
 				} catch (err) {
 					console.error(err);
-					return msg.channel.send(`Had an error. Contact willyb321#2816`);
+					return msg.channel.send('Had an error. Contact willyb321#2816');
 				}
 			})
 			.catch(err => {
 				console.error(err);
-				return msg.channel.send(`Had an error. Contact willyb321#2816`);
+				return msg.channel.send('Had an error. Contact willyb321#2816');
 			});
 	}
 };
