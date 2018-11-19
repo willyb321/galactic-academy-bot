@@ -1,13 +1,25 @@
 const commando = require('discord.js-commando');
 
-const combatBuilds = `Combat Builds (Courtesy of Tempest):
-Viper MK.III (4mil budget): <https://s.orbis.zone/GVNAurCo>
-Cobra MK.III (10mil budget): <https://s.orbis.zone/SpfvZC96>
-Vulture (25mil budget):  <https://s.orbis.zone/dJ4uk71r>
-Fer-De-Lance (80mil budget): <https://s.orbis.zone/DthwU6K6>
-Imperial Clipper (120mil budget): <https://s.orbis.zone/WMgPZpg0>
-Fer-De-Lance (150 mil budget): <https://s.orbis.zone/Q_se8Ko_>
-Python (250mil budget): <https://s.orbis.zone/LFYbpf9n>
+const combatBuilds = `Viper mk 3 non-engineered: <https://edshipyard.net/builds/pe>
+Viper mk 3 engineered: <https://edshipyard.net/builds/pk> 
+
+Cobra mk 3 non-engineered: <https://edshipyard.net/builds/qg>
+Cobra mk 3 engineered: <https://edshipyard.net/builds/qh>
+
+Vulture non-engineered: <https://edshipyard.net/builds/pm>
+Vulture engineered: <https://edshipyard.net/builds/po>
+
+Fer-de-lance non-engineered: <https://edshipyard.net/builds/pq>
+Fer-de-lance engineered: <https://edshipyard.net/builds/pr>
+
+Python non-engineered: <https://edshipyard.net/builds/ps>
+Python engineered: <https://edshipyard.net/builds/pt>
+
+Chieftain non-engineered: <https://edshipyard.net/builds/pu>
+Chieftain engineered: <https://edshipyard.net/builds/pv>
+
+Krait non-engineered: <https://edshipyard.net/builds/qd>
+Krait engineered: <https://edshipyard.net/builds/qe>
 `;
 
 const explBuilds = `Exploration builds:
