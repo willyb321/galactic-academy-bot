@@ -9,21 +9,21 @@
     "twitch": "nodemon twitch.js"
   },
   "dependencies": {
-    "common-tags": "^1.7.2",
-    "discord.js": "^11.3.2",
-    "discord.js-commando": "^0.10.0",
-    "get-urls": "^7.2.0",
-    "lodash": "^4.17.10",
-    "luxon": "^1.4.3",
-    "request": "^2.87.0",
+    "common-tags": "^1.8.0",
+    "discord.js": "github:discordjs/discord.js",
+    "discord.js-commando": "github:discordjs/commando",
+    "get-urls": "^8.0.0",
+    "lodash": "^4.17.11",
+    "luxon": "^1.10.0",
+    "request": "^2.88.0",
     "request-promise-native": "^1.0.5",
-    "sqlite": "^2.9.1",
-    "twitch": "^0.18.0",
+    "sqlite": "^3.0.0",
+    "twitch": "^1.2.0",
     "twitch-webhook": "^1.2.4"
   },
   "devDependencies": {
-    "@types/common-tags": "^1.4.0",
-    "@types/node": "^9.4.5",
-    "nodemon": "^1.14.12"
+    "@types/common-tags": "^1.8.0",
+    "@types/node": "^10.12.18",
+    "nodemon": "^1.18.9"
   }
 }
