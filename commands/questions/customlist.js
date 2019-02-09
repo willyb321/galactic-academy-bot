@@ -48,7 +48,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 							return;
 						}
 						elem[key] = truncateString(elem[key].replace(/\n/igm, ' '), 35);
-						elem[key] = elem[key].replace(/|`/igm, '');
+						elem[key] = elem[key].replace(/`/igm, '');
 						getUrls(elem[key]).forEach(url => {
 							elem[key] = elem[key].replace(url, `<${url}>`);
 						});
