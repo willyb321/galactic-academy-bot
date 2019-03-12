@@ -1,19 +1,9 @@
-const TwitchWebhook = require('twitch-webhook');
 const EventEmitter = require('events').EventEmitter;
 const TwitchClient = require('twitch').default;
 
 const clientId = process.env.TWITCH_CLIENT_ID;
 const accessToken = process.env.TWITCH_CLIENT_SECRET;
 
-const twitchWebhook = new TwitchWebhook({
-	client_id: process.env.TWITCH_CLIENT_ID,
-	callback: process.env.TWITCH_CALLBACK,
-	secret: process.env.TWITCH_CLIENT_SECRET, // Default: false
-	listen: {
-		port: 8888, // Default: 8443
-		host: '0.0.0.0' // Default: 0.0.0.0
-	}
-});
 const twitchClient = TwitchClient.withCredentials(clientId, accessToken);
 
 const interval = 120000;
@@ -27,13 +17,6 @@ async function isStreamLive(id) {
 		return false;
 	}
 }
-
-twitchWebhook.on('unsubscibe', obj => {
-	twitchWebhook.subscribe(obj['hub.topic'])
-		.catch(err => {
-			console.error(err.message);
-		});
-});
 
 process.on('SIGINT', async () => {
 	// Unsubscribe from all topics
