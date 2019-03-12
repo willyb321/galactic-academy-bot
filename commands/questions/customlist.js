@@ -1,5 +1,6 @@
 const commando = require('discord.js-commando');
 const getUrls = require('get-urls');
+const _ = require('lodash');
 
 const truncateString = (str, num) =>
 	str.length > num ? str.slice(0, num > 3 ? num - 3 : num) + '...' : str;
@@ -35,8 +36,8 @@ module.exports = class CustomGetCommand extends commando.Command {
 						return msg.channel.send('No custom settings found. Add one with the !s[et]c[ustom] command');
 					}
 					elem = JSON.parse(elem.settings);
-					elem = elem.sort();
-					const keys = Object.keys(elem);
+					let keys = Object.keys(elem);
+					keys = keys.sort();
 					let reply = 'Custom commands list:\n';
 					keys.forEach(key => {
 						if (key.startsWith('twitch_')) {
