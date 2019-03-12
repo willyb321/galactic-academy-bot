@@ -35,6 +35,7 @@ module.exports = class CustomGetCommand extends commando.Command {
 						return msg.channel.send('No custom settings found. Add one with the !s[et]c[ustom] command');
 					}
 					elem = JSON.parse(elem.settings);
+					elem = elem.sort();
 					const keys = Object.keys(elem);
 					let reply = 'Custom commands list:\n';
 					keys.forEach(key => {
