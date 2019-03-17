@@ -148,9 +148,13 @@ function initTwitch(guild) {
 		return;
 	}
 	twitchInstances.instances.forEach(async (e, i) => {
-		await e.destroy();
-		delete twitchInstances.instances[i];
-		e = null;
+		try {
+			await e.destroy();
+			delete twitchInstances.instances[i];
+			e = null;
+		} catch (e) {
+			console.error(e)
+		}
 	});
 	twitchInstances.instances = twitchInstances.instances.filter(n => n);
 	twitchInstances.listeners = twitchInstances.listeners.filter(n => n);
