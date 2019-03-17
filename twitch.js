@@ -20,8 +20,6 @@ async function isStreamLive(id) {
 
 process.on('SIGINT', async () => {
 	// Unsubscribe from all topics
-	await twitchWebhook.unsubscribe('*');
-
 	process.exit(0);
 });
 
