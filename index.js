@@ -4,7 +4,7 @@ const commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 
-const RichEmbed = require('discord.js').RichEmbed;
+const {MessageEmbed} = require('discord.js');
 const _ = require('lodash');
 const registerAllCmds = require('./custom-reg');
 const TwitchListener = require('./twitch');
@@ -90,37 +90,41 @@ const twitchInstances = {
 
 const listeners = ({topic, endpoint, event}, i) => {
 	if (process.env.NODE_ENV !== 'production') {
-		return;
+		// return;
 	}
-	if (event && event._data && event._data.stream) {
-		if (event._data.stream.channel._id.toString() !== i._id) {
+	if (event && event._data && event._data) {
+		console.log(event._data)
+
+		if (event._data.channel._id.toString() !== i._id) {
+			console.log('Wrong ID', i._id, event._data.channel._id.toString())
 			return;
 		}
-		if (event._data.stream.created_at <= twitchInstances.startTime.toISOString()) {
+		// if (event._data.created_at <= twitchInstances.startTime.toISOString()) {
+		// 	console.log('Already posted');
+		// 	return;
+		// }
+		if (event._data.created_at === twitchInstances.timestamps[event._data.channel._id]) {
 			return;
 		}
-		if (event._data.stream.created_at === twitchInstances.timestamps[event._data.stream.channel._id]) {
+		if (event._data.game !== 'Elite: Dangerous') {
 			return;
 		}
-		if (event._data.stream.game !== 'Elite: Dangerous') {
-			return;
-		}
-		console.log(event._data.stream);
+		console.log(event._data);
 		const channel = client.channels.get(i._channel);
-		const embed = new RichEmbed();
-		embed.setDescription(event._data.stream.channel.status);
-		embed.setTitle(`${i._username} just went live with ${event._data.stream.game}`);
-		const url = `${event._data.stream.preview.template.replace('{width}', '1280').replace('{height}', '720')}?cache=${new Date().valueOf()}`;
+		const embed = new MessageEmbed();
+		embed.setDescription(event._data.channel.status);
+		embed.setTitle(`${i._username} just went live with ${event._data.game}`);
+		const url = `${event._data.preview.template.replace('{width}', '1280').replace('{height}', '720')}?cache=${new Date().valueOf()}`;
 		embed.setImage(url);
-		embed.setURL(event._data.stream.channel.url);
+		embed.setURL(event._data.channel.url);
 		channel.send({embed});
-		twitchInstances.timestamps[event._data.stream.channel._id] = event._data.stream.created_at;
+		twitchInstances.timestamps[event._data.channel._id] = event._data.created_at;
 	}
 };
 
 function resetTwitch() {
 	if (process.env.NODE_ENV !== 'production') {
-		return;
+		// return;
 	}
 	twitchInstances.listeners.forEach((e, i) => {
 		e.removeAllListeners('streams');
@@ -145,7 +149,7 @@ function resetTwitch() {
 
 function initTwitch(guild) {
 	if (process.env.NODE_ENV !== 'production') {
-		return;
+		// return;
 	}
 	twitchInstances.instances.forEach(async (e, i) => {
 		try {

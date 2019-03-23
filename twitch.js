@@ -49,6 +49,7 @@ class TwitchListener extends EventEmitter {
 		try {
 			return await twitchClient.streams.getStreamByChannel(this._id); // Will reject the promise if the stream is not live
 		} catch (e) {
+			console.error(e);
 			return false;
 		}
 	}
