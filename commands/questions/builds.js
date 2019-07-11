@@ -1,6 +1,6 @@
 const commando = require('discord.js-commando');
 
-const combatBuilds = `**Temporarily disabled**`;
+const combatBuilds = `Combat Builds: **Temporarily disabled**`;
 
 const explBuilds = `Exploration builds:
 "My first explorer"/taxi Hauler: <https://s.orbis.zone/j_4Dt8Kw>
