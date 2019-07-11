@@ -1,26 +1,6 @@
 const commando = require('discord.js-commando');
 
-const combatBuilds = `Viper mk 3 non-engineered: <https://edshipyard.net/builds/pe>
-Viper mk 3 engineered: <https://edshipyard.net/builds/pk> 
-
-Cobra mk 3 non-engineered: <https://edshipyard.net/builds/qg>
-Cobra mk 3 engineered: <https://edshipyard.net/builds/qh>
-
-Vulture non-engineered: <https://edshipyard.net/builds/pm>
-Vulture engineered: <https://edshipyard.net/builds/po>
-
-Fer-de-lance non-engineered: <https://edshipyard.net/builds/pq>
-Fer-de-lance engineered: <https://edshipyard.net/builds/pr>
-
-Python non-engineered: <https://edshipyard.net/builds/ps>
-Python engineered: <https://edshipyard.net/builds/pt>
-
-Chieftain non-engineered: <https://edshipyard.net/builds/pu>
-Chieftain engineered: <https://edshipyard.net/builds/pv>
-
-Krait non-engineered: <https://edshipyard.net/builds/qd>
-Krait engineered: <https://edshipyard.net/builds/qe>
-`;
+const combatBuilds = `**Temporarily disabled**`;
 
 const explBuilds = `Exploration builds:
 "My first explorer"/taxi Hauler: <https://s.orbis.zone/j_4Dt8Kw>
