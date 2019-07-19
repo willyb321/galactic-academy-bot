@@ -7,7 +7,7 @@
 const Commando = require('discord.js-commando');
 
 const muteRoleId = '375632007365132288';
-const rolesWithAccess = ['147037677764608000', '147037704142454784']; // Captains + mentors
+const rolesWithAccess = ['147037704142454784', '598684217249103873']; // Captains + mentors
 module.exports = class MuteCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
@@ -31,8 +31,8 @@ module.exports = class MuteCommand extends Commando.Command {
 					type: 'integer',
 					prompt: 'How long? Minutes.',
 					min: 1,
-					default: 10,
-					max: 60
+					default: 60,
+					max: 1440
 				}
 			]
 		});
@@ -53,14 +53,14 @@ module.exports = class MuteCommand extends Commando.Command {
 	async run(message, args) {
 		const muteRole = message.guild.roles.get(muteRoleId);
 		let time = args.time * 60000;
-		if (time > 3600000) {
-			time = 3600000;
+		if (time > 86400000) {
+			time = 86400000;
 		}
 		console.log(`Mins: ${args.time} = ${time}ms`);
-		return args.user.addRole(muteRole)
+		return args.user.roles.add(muteRole)
 			.then(() => {
 				setTimeout(async () => {
-					await args.user.removeRole(muteRole, `Removed mute after ${args.time} mins`);
+					await args.user.roles.remove(muteRole, `Removed mute after ${args.time} mins`);
 				}, time);
 			})
 			.catch(err => {
