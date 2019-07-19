@@ -51,6 +51,10 @@ module.exports = class MuteCommand extends Commando.Command {
 	}
 
 	async run(message, args) {
+		const muteRoleID = await message.guild.settings.get('muteRole');
+		if (!muteRoleID) {
+			return message.reply('Please set a mute role with !setmute @muterole')
+		}
 		const muteRole = message.guild.roles.get(muteRoleId);
 		let time = args.time * 60000;
 		if (time > 86400000) {

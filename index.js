@@ -76,6 +76,7 @@ client.registry
 	.registerGroup('questions', 'Questions')
 	.registerGroup('custom', 'Custom')
 	.registerGroup('misc', 'Misc')
+	.registerGroup('admin', 'Admin')
 	.registerDefaults()
 	.registerCommandsIn(path.join(__dirname, 'commands'));
 
