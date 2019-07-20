@@ -68,15 +68,11 @@ module.exports = class AddGuideCommand extends commando.Command {
 			]
 		});
 	}
-
-	hasPermission(msg) {
-		if (!msg || !msg.member) {
-			return false;
-		}
-		return Boolean(msg.member.roles.get(botAccessID));
-	}
-
 	async run(msg, args) {
+		const botAccessLow = await message.guild.settings.get('lowLvlBotAccess');
+		if (!message.member.roles.get(botAccessLow)) {
+			return new Commando.FriendlyError('Not enough permission.');
+		}
 		let text = args.guide;
 		const title = `**${args.title}:**`;
 		const category = args.category;

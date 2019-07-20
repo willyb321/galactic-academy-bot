@@ -28,14 +28,12 @@ module.exports = class PurgeCommand extends commando.Command {
 		});
 	}
 
-	hasPermission(msg) {
-		if (!msg || !msg.member) {
-			return false;
-		}
-		return Boolean(msg.member.roles.get(botAccessID));
-	}
-
 	async run(message, args) {
+
+		const botAccessHigh = await message.guild.settings.get('highLvlBotAccess');
+		if (!message.member.roles.get(botAccessHigh)) {
+			return new Commando.FriendlyError('Not enough permission.');
+		}
 		let limit = args.amount;
 		if (!limit) {
 			return;
@@ -43,7 +41,7 @@ module.exports = class PurgeCommand extends commando.Command {
 		if (limit > 25) {
 			limit = 25;
 		}
-		return message.channel.fetchMessages({limit: limit + 1})
+		return message.channel.fetchMessages({ limit: limit + 1 })
 			.then(messages => message.channel.bulkDelete(messages))
 			.then(() => {
 				return undefined;

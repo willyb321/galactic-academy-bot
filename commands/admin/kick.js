@@ -22,6 +22,11 @@ module.exports = class KickCommand extends commando.Command {
 					key: 'member',
 					prompt: 'Who to kick?',
 					type: 'member'
+				},
+				{
+					key: 'reason',
+					prompt: 'Why?',
+					type: 'string'
 				}
 			]
 		});
@@ -39,7 +44,7 @@ module.exports = class KickCommand extends commando.Command {
 		try {
 			const member = args.member;
 			kickName = member.user.tag;
-			await member.kick(`Kick requested by ${message.author.tag} [ID: ${message.author.id}]`)
+			await member.kick(`Kick requested by ${message.author.tag} [ID: ${message.author.id}]\nReason given: ${args.reason.toString()}`)
 		} catch (error) {
 			console.error(error);
 			return message.reply('Failed to kick.');

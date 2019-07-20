@@ -1,7 +1,5 @@
 const commando = require('discord.js-commando');
 
-const botAccessID = '417830772838367233';
-
 module.exports = class CustomDelCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
@@ -25,16 +23,13 @@ module.exports = class CustomDelCommand extends commando.Command {
 		});
 	}
 
-	hasPermission(msg) {
-		if (!msg || !msg.member) {
-			return false;
-		}
-		return Boolean(msg.member.roles.get(botAccessID));
-	}
-
 	async run(msg, args) {
 		if (!msg.client) {
 			return;
+		}
+		const botAccessLow = await message.guild.settings.get('lowLvlBotAccess');
+		if (!message.member.roles.get(botAccessLow)) {
+			return new Commando.FriendlyError('Not enough permission.');
 		}
 		const provider = msg.client.provider;
 		if (!provider) {

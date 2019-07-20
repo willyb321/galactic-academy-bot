@@ -37,7 +37,7 @@ function delGuide(client, guild, category, title) {
 		});
 }
 
-module.exports = class AddGuideCommand extends commando.Command {
+module.exports = class DelGuideCommand extends commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'delguide',
@@ -64,14 +64,12 @@ module.exports = class AddGuideCommand extends commando.Command {
 		});
 	}
 
-	hasPermission(msg) {
-		if (!msg || !msg.member) {
-			return false;
-		}
-		return Boolean(msg.member.roles.get(botAccessID));
-	}
 
 	async run(msg, args) {
+		const botAccessLow = await message.guild.settings.get('lowLvlBotAccess');
+		if (!message.member.roles.get(botAccessLow)) {
+			return new Commando.FriendlyError('Not enough permission.');
+		}
 		const title = _.escapeRegExp(`**${args.title}:**`);
 		await delGuide(msg.client, msg.guild, args.category, title);
 		return msg.channel.send(`Tried to delete the guide ${args.title} under ${args.category}, check guide command output again.`);

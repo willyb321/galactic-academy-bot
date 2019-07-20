@@ -38,19 +38,13 @@ module.exports = class MuteCommand extends Commando.Command {
 		});
 	}
 
-	hasPermission(message) {
-		if (!message.member) {
-			return false;
-		}
-		for (const i of rolesWithAccess) {
-			if (message.member.roles.get(i)) {
-				return true;
-			}
-		}
-		return message.client.isOwner(message.author);
-	}
 
 	async run(message, args) {
+
+		const botAccessLow = await message.guild.settings.get('lowLvlBotAccess');
+		if (!message.member.roles.get(botAccessLow)) {
+			return new Commando.FriendlyError('Not enough permission.');
+		}
 		const muteRoleID = await message.guild.settings.get('muteRole');
 		if (!muteRoleID) {
 			return message.reply('Please set a mute role with !setmute @muterole')
