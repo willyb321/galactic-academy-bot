@@ -7,6 +7,7 @@ const sqlite = require('sqlite');
 const {MessageEmbed} = require('discord.js');
 const _ = require('lodash');
 const registerAllCmds = require('./custom-reg');
+const auditLog = require('./audit-log');
 const TwitchListener = require('./twitch');
 
 const client = new commando.Client({
@@ -204,6 +205,7 @@ client.on('ready', () => {
 		client.guilds.forEach(guild => {
 			initTwitch(guild.id);
 		});
+		auditLog(client);
 	}, 3000);
 });
 
