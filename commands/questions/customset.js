@@ -35,8 +35,8 @@ module.exports = class CustomSetCommand extends commando.Command {
 		if (!msg.client) {
 			return;
 		}
-		const botAccessLow = await message.guild.settings.get('lowLvlBotAccess');
-		if (!message.member.roles.get(botAccessLow)) {
+		const botAccessLow = await msg.guild.settings.get('lowLvlBotAccess');
+		if (!msg.member.roles.get(botAccessLow)) {
 			return new Commando.FriendlyError('Not enough permission.');
 		}
 		const provider = msg.client.provider;
