@@ -37,7 +37,7 @@ module.exports = async function logEvents(client) {
         log.send({embed});
     });
 
-    client.on('guildMemberAdd', member => {
+    client.on('guildMemberAdd', async member => {
         const guild = member.guild;
         const logChannelID = guild.settings.get('logChannel');
         const autoRoleID = guild.settings.get('autoRole');
