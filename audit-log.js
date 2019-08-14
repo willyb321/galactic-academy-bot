@@ -53,7 +53,7 @@ module.exports = async function logEvents(client) {
         if (!channel) {
             return;
         }
-        const embed = genEmbed(`Someone joined ${member.guild.name}`, `Name: ${member.tag}`);
+        const embed = genEmbed(`Someone joined ${member.guild.name}`, `Name: ${member.user.tag}`);
         embed
             .addField('Mention', member.toString())
             .addField('ID', member.user.id);
