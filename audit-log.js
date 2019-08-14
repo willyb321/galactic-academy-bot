@@ -1,8 +1,10 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
 
-const genEmbed = () => new Discord.MessageEmbed()
+const genEmbed = (title, description) => new Discord.MessageEmbed()
     .setFooter('Galactic Academy Bot - By Willyb321')
+    .setTitle(title || '')
+    .setDescription(description || '')
     .setTimestamp();
 
 module.exports = async function logEvents(client) {
@@ -12,10 +14,8 @@ module.exports = async function logEvents(client) {
         if (!log) {
             return;
         }
-        const embed = genEmbed();
+        const embed = genEmbed(`Message by ${messageDelete.author.tag} Deleted`, `Channel: ${messageDelete.channel.toString()}`);
         embed
-            .setTitle(`Message by ${messageDelete.author.tag} Deleted`)
-            .setDescription(`Channel: ${messageDelete.channel.toString()}`)
             .addField('Message content', messageDelete.content)
             .addField('Author ID:', messageDelete.author.id)
         log.send({embed});
@@ -29,10 +29,8 @@ module.exports = async function logEvents(client) {
         if (!log) {
             return;
         }
-        const embed = genEmbed();
+        const embed = genEmbed(`Message by ${oldMessage.author.tag} Edited`, `Channel: ${oldMessage.channel.toString()}`);
         embed
-            .setTitle(`Message by ${oldMessage.author.tag} Edited`)
-            .setDescription(`Channel: ${oldMessage.channel.toString()}`)
             .addField('Author ID:', oldMessage.author.id)
             .addField('Old message', oldMessage.content)
             .addField('New message', newMessage.content)
@@ -46,10 +44,9 @@ module.exports = async function logEvents(client) {
         if (!channel) {
             return;
         }
-        const embed = genEmbed();
+        const embed = genEmbed(`Someone joined ${member.guild.name}`, `Name: ${member.tag}`);
         embed
-            .setTitle(`Someone joined ${member.guild.name}`)
-            .setDescription(`Name: ${member.toString()}`)
+            .addField('Mention', member.toString())
             .addField('ID', member.user.id);
             channel.send({embed});
     });
