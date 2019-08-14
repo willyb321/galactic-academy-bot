@@ -40,6 +40,15 @@ module.exports = async function logEvents(client) {
     client.on('guildMemberAdd', member => {
         const guild = member.guild;
         const logChannelID = guild.settings.get('logChannel');
+        const autoRoleID = guild.settings.get('autoRole');
+        const role = guild.roles.get(autoRoleID);
+        if (role) {
+            try {
+                await member.roles.add(role);
+            } catch (error) {
+                console.error(error);
+            }
+        }
         const channel = guild.channels.get(logChannelID);
         if (!channel) {
             return;
