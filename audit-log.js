@@ -58,10 +58,8 @@ module.exports = async function logEvents(client) {
         if (!channel) {
             return;
         }
-        const embed = genEmbed();
+        const embed = genEmbed(`Someone left ${member.guild.name}`, `Name: ${member.user.tag}`);
         embed
-            .setTitle(`Someone left ${member.guild.name}`)
-            .setDescription(`Name: ${member.user.tag}`)
             .addField('ID', member.user.id);
         channel.send({embed});
     });
