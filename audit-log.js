@@ -1,5 +1,6 @@
 const commando = require('discord.js-commando');
 const Discord = require('discord.js');
+const diff = require('shallow-diff');
 
 const genEmbed = (title, description) => new Discord.MessageEmbed()
     .setFooter('Galactic Academy Bot - By Willyb321')
@@ -70,6 +71,35 @@ module.exports = async function logEvents(client) {
         const embed = genEmbed(`Someone left ${member.guild.name}`, `Name: ${member.user.tag}`);
         embed
             .addField('ID', member.user.id);
+        channel.send({embed});
+    });
+
+    const diffBlacklist = ['_roles'];
+
+    client.on('guildMemberUpdate', (oldMember, newMember) => {
+        const guild = newMember.guild;
+        const logChannelID = guild.settings.get('logChannel');
+        const channel = guild.channels.get(logChannelID);
+        if (!channel) {
+            return;
+        }
+        const embed = genEmbed(`User Update`, `User Tag: ${newMember.user.tag} User ID: ${newMember.id}`);
+        diff(oldMember, newMember).updated.forEach(changed => {
+            if (diffBlacklist.includes(changed)) {
+                return;
+            }
+            if (changed === 'nickname' && !oldMember.nickname) {
+                embed.addField(`Field Changed: ${changed}`, `${oldMember.user.username} => ${newMember[changed]}`);
+                return    
+            }
+            if (changed === 'nickname' && !newMember.nickname) {
+                embed.addField(`Field Changed: ${changed}`, `${oldMember[changed]} => ${newMember.user.username}`);
+                return    
+            }
+            console.log(`Field Changed: ${changed}`);
+            console.log(`${oldMember[changed]} => ${newMember[changed]}`);
+            embed.addField(`Field Changed: ${changed}`, `${oldMember[changed]} => ${newMember[changed]}`);
+        });
         channel.send({embed});
     });
 
