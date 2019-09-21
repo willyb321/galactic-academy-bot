@@ -8,7 +8,13 @@ const genEmbed = (title, description) => new Discord.MessageEmbed()
     .setDescription(description || '')
     .setTimestamp();
 
+let auditLogging = false;
+
 module.exports = async function logEvents(client) {
+    if (auditLogging === true) {
+        return;
+    }
+    console.log('Logging');
     client.on("messageDelete", async (messageDelete) => {
         const logChannel = await messageDelete.guild.settings.get('logChannel');
         const log = client.channels.get(logChannel);
@@ -84,6 +90,15 @@ module.exports = async function logEvents(client) {
             return;
         }
         const embed = genEmbed(`User Update`, `User Tag: ${newMember.user.tag} User ID: ${newMember.id}`);
+        const oldRoles = oldMember.roles.array().map(e => `${e.name} [${e.id}]`);
+        const newRoles = newMember.roles.array().map(e => `${e.name} [${e.id}]`);
+        const roleDiff = diff(oldRoles, newRoles);
+        if (roleDiff.added.length > 0) {
+            embed.addField('Roles added', roleDiff.added.join('\n'))
+        }
+        if (roleDiff.deleted.length > 0) {
+            embed.addField('Roles removed', roleDiff.added.join('\n'))
+        }
         diff(oldMember, newMember).updated.forEach(changed => {
             if (diffBlacklist.includes(changed)) {
                 return;
@@ -100,7 +115,9 @@ module.exports = async function logEvents(client) {
             console.log(`${oldMember[changed]} => ${newMember[changed]}`);
             embed.addField(`Field Changed: ${changed}`, `${oldMember[changed]} => ${newMember[changed]}`);
         });
+        console.log(embed.fields.length);
         channel.send({embed});
     });
 
+    auditLogging = true;
 }
