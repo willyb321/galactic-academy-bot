@@ -94,10 +94,22 @@ module.exports = async function logEvents(client) {
         const newRoles = newMember.roles.array().map(e => `${e.name} [${e.id}]`);
         const roleDiff = diff(oldRoles, newRoles);
         if (roleDiff.added.length > 0) {
-            embed.addField('Roles added', roleDiff.added.join('\n'))
+            let roles = [];
+            newRoles.forEach(e => {
+                if (!oldRoles.includes(e)) {
+                    roles.push(e);
+                }
+            });
+            embed.addField('Roles added', roles.join(', '))
         }
         if (roleDiff.deleted.length > 0) {
-            embed.addField('Roles removed', roleDiff.added.join('\n'))
+            let roles = [];
+            oldRoles.forEach(e => {
+                if (!newRoles.includes(e)) {
+                    roles.push(e);
+                }
+            });
+            embed.addField('Roles removed', roles.join(', '))
         }
         diff(oldMember, newMember).updated.forEach(changed => {
             if (diffBlacklist.includes(changed)) {
