@@ -32,7 +32,7 @@ module.exports = class BanCommand extends commando.Command {
 	}
 
 	async run(message, args) {
-		const botAccessHigh = await message.guild.settings.get('highLvlBotAccess');
+		const botAccessHigh = await message.guild.settings.get('settings_highLvlBotAccess');
 		if (!message.member.roles.get(botAccessHigh)) {
 			return message.reply('Not enough permission.');
 		}

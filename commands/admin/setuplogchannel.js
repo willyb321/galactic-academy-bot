@@ -27,13 +27,13 @@ module.exports = class SetupBotLogCommand extends Commando.Command {
 	}
 
 	async run(message, args) {
-		const botAccessHigh = await message.guild.settings.get('highLvlBotAccess');
+		const botAccessHigh = await message.guild.settings.get('settings_highLvlBotAccess');
 		if (!message.member.roles.get(botAccessHigh)) {
 			return new Commando.FriendlyError('Not enough permission.');
 		}
 		const logChannel = args.logchannel;
 		try {
-			await message.guild.settings.set('logChannel', logChannel.id);
+			await message.guild.settings.set('settings_logChannel', logChannel.id);
 		} catch (err) {
 			console.error(err);
 			return message.channel.send('Failed to setup log channel.');

@@ -39,8 +39,8 @@ module.exports = class SetupBotAccessRoleCommand extends Commando.Command {
 		const lowLvl = args.lowlevel;
 		const highLvl = args.highlevel;
 		try {
-			await message.guild.settings.set('lowLvlBotAccess', lowLvl.id);
-			await message.guild.settings.set('highLvlBotAccess', highLvl.id);
+			await message.guild.settings.set('settings_lowLvlBotAccess', lowLvl.id);
+			await message.guild.settings.set('settings_highLvlBotAccess', highLvl.id);
 		} catch (err) {
 			console.error(err);
 			return message.channel.send('Failed to setup bot access role.');

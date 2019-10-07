@@ -30,7 +30,7 @@ module.exports = class PurgeCommand extends commando.Command {
 
 	async run(message, args) {
 
-		const botAccessHigh = await message.guild.settings.get('highLvlBotAccess');
+		const botAccessHigh = await message.guild.settings.get('settings_highLvlBotAccess');
 		if (!message.member.roles.get(botAccessHigh)) {
 			return new Commando.FriendlyError('Not enough permission.');
 		}

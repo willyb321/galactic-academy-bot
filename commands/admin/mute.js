@@ -41,7 +41,7 @@ module.exports = class MuteCommand extends Commando.Command {
 
 	async run(message, args) {
 
-		const botAccessLow = await message.guild.settings.get('lowLvlBotAccess');
+		const botAccessLow = await message.guild.settings.get('settings_lowLvlBotAccess');
 		if (!message.member.roles.get(botAccessLow)) {
 			return new Commando.FriendlyError('Not enough permission.');
 		}

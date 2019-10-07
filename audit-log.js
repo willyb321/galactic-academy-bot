@@ -16,7 +16,7 @@ module.exports = async function logEvents(client) {
     }
     console.log('Logging');
     client.on("messageDelete", async (messageDelete) => {
-        const logChannel = await messageDelete.guild.settings.get('logChannel');
+        const logChannel = await messageDelete.guild.settings.get('settings_logChannel');
         const log = client.channels.get(logChannel);
         if (!log) {
             return;
@@ -31,7 +31,7 @@ module.exports = async function logEvents(client) {
         if (oldMessage.content === newMessage.content) {
             return;
         }
-        const logChannel = await oldMessage.guild.settings.get('logChannel');
+        const logChannel = await oldMessage.guild.settings.get('settings_logChannel');
         const log = client.channels.get(logChannel);
         if (!log) {
             return;
@@ -46,8 +46,8 @@ module.exports = async function logEvents(client) {
 
     client.on('guildMemberAdd', async member => {
         const guild = member.guild;
-        const logChannelID = guild.settings.get('logChannel');
-        const autoRoleID = guild.settings.get('autoRole');
+        const logChannel = guild.settings.get('settings_logChannel');
+        const autoRoleID = guild.settings.get('settings_autoRole');
         const role = guild.roles.get(autoRoleID);
         if (role) {
             try {
@@ -56,7 +56,7 @@ module.exports = async function logEvents(client) {
                 console.error(error);
             }
         }
-        const channel = guild.channels.get(logChannelID);
+        const channel = guild.channels.get(logChannel);
         if (!channel) {
             return;
         }
@@ -69,7 +69,7 @@ module.exports = async function logEvents(client) {
 
     client.on('guildMemberRemove', member => {
         const guild = member.guild;
-        const logChannelID = guild.settings.get('logChannel');
+        const logChannelID = guild.settings.get('settings_logChannel');
         const channel = guild.channels.get(logChannelID);
         if (!channel) {
             return;
@@ -84,7 +84,7 @@ module.exports = async function logEvents(client) {
 
     client.on('guildMemberUpdate', (oldMember, newMember) => {
         const guild = newMember.guild;
-        const logChannelID = guild.settings.get('logChannel');
+        const logChannelID = guild.settings.get('settings_logChannel');
         const channel = guild.channels.get(logChannelID);
         if (!channel) {
             return;

@@ -49,6 +49,9 @@ module.exports = class CustomGetCommand extends commando.Command {
 						if (key.startsWith('guides_')) {
 							return;
 						}
+						if (key.startsWith('settings_')) {
+							return;
+						}
 						elem[key] = truncateString(elem[key].replace(/\n/igm, ' '), 35);
 						elem[key] = elem[key].replace(/`/igm, '');
 						getUrls(elem[key]).forEach(url => {

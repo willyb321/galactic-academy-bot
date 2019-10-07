@@ -33,7 +33,7 @@ module.exports = class SetupAutoRoleCommand extends Commando.Command {
 	async run(message, args) {
 		const role = args.role;
 		try {
-			await message.guild.settings.set('autoRole', role.id);
+			await message.guild.settings.set('settings_autoRole', role.id);
 		} catch (err) {
 			console.error(err);
 			return message.channel.send('Failed to setup auto role.');
