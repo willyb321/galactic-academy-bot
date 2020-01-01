@@ -4,9 +4,9 @@
 /**
  * ignore
  */
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 
-module.exports = class BanCommand extends commando.Command {
+module.exports = class BanCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'ban',

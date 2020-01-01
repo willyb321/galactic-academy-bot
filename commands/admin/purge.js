@@ -4,10 +4,10 @@
 /**
  * ignore
  */
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 
 const botAccessID = '417830772838367233';
-module.exports = class PurgeCommand extends commando.Command {
+module.exports = class PurgeCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'purge',

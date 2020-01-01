@@ -1,6 +1,6 @@
 /* eslint-disable no-console */
 const path = require('path');
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 const oneLine = require('common-tags').oneLine;
 const sqlite = require('sqlite');
 
@@ -10,7 +10,7 @@ const registerAllCmds = require('./custom-reg');
 const auditLog = require('./audit-log');
 const TwitchListener = require('./twitch');
 
-const client = new commando.Client({
+const client = new Commando.Client({
 	owner: ['121791193301385216', '387529259901517835', '183414699214241792', '120290771529236482'],
 	commandPrefix: process.env.NODE_ENV === 'production' ? '!' : '?',
 	unknownCommandResponse: false
@@ -37,7 +37,7 @@ client
 		console.warn('Reconnecting...');
 	})
 	.on('commandError', (cmd, err) => {
-		if (err instanceof commando.FriendlyError) {
+		if (err instanceof Commando.FriendlyError) {
 			return;
 		}
 		console.error(`Error in command ${cmd.groupID}:${cmd.memberName}`, err);
@@ -70,7 +70,7 @@ client
 	});
 
 client.setProvider(
-	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new commando.SQLiteProvider(db))
+	sqlite.open(path.join(__dirname, 'database.sqlite3')).then(db => new Commando.SQLiteProvider(db))
 ).catch(console.error);
 
 client.registry

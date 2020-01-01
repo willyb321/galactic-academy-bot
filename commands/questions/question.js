@@ -1,10 +1,10 @@
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 
 const roleMap = {
 	background_simulation: 'BGS'
 };
 
-module.exports = class QuestionCommand extends commando.Command {
+module.exports = class QuestionCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'question',

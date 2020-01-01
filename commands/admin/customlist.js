@@ -1,10 +1,10 @@
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 const getUrls = require('get-urls');
 const _ = require('lodash');
 
 const truncateString = (str, num) =>
 	str.length > num ? str.slice(0, num > 3 ? num - 3 : num) + '...' : str;
-module.exports = class CustomGetCommand extends commando.Command {
+module.exports = class CustomGetCommand extends Commando.Command {
 	constructor(client) {
 		super(client, {
 			name: 'listcustom',

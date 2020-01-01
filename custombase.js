@@ -1,6 +1,6 @@
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 
-module.exports = class CustomRootCommand extends commando.Command {
+module.exports = class CustomRootCommand extends Commando.Command {
 	constructor(client, cmdInfo) {
 		cmdInfo = {
 			name: cmdInfo.name.replace(' ', ''),

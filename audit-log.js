@@ -1,4 +1,4 @@
-const commando = require('discord.js-commando');
+const Commando = require('discord.js-commando');
 const Discord = require('discord.js');
 const diff = require('shallow-diff');
 
